@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmigoNeon - VTuber Desktop Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0B0E14;
+      --card-bg: #151922;
+      --accent: #00E5FF;
+      --accent-purple: #7C4DFF;
+      --text: #F0F4F8;
+      --text-dim: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* Fondo degradado */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 15%;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, var(--accent) 0%, var(--accent-purple) 70%, transparent 100%);
+      filter: blur(120px);
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* Avatar flotante */
+    .avatar-container {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 25px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .avatar-img {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.4);
+      object-fit: cover;
+      background: #111;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      z-index: 1;
+      background: linear-gradient(135deg, #FFF 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.tagline {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      max-width: 650px;
+      margin: 15px auto 35px;
+      line-height: 1.6;
+      z-index: 1;
+    }
+
+    /* Botones principales */
+    .cta-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      z-index: 1;
+    }
+    .btn {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(0, 229, 255, 0.5);
+    }
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid #2D3748;
+    }
+    .btn-secondary:hover {
+      background: #1F2430;
+      transform: translateY(-3px);
+    }
+
+    /* Grilla de características */
+    .features {
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid #232936;
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card h3 { font-size: 1.25rem; margin-bottom: 8px; color: var(--accent); }
+    .card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.5; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      border-top: 1px solid #1E232F;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="avatar-container">
+      <img src="assets/sprites/quieto.png" alt="AmigoNeon Avatar" class="avatar-img" onerror="this.src='https://raw.githubusercontent.com/malte-j/desktop-pet/master/assets/idle.png'">
+    </div>
+    <h1>AmigoNeon</h1>
+    <p class="tagline">Tu asistente de escritorio VTuber impulsado por IA híbrida (Gemini 3.6 Flash + Qwen local), sincronización labial RMS, visión de pantalla y automatización total de Windows.</p>
+    <div class="cta-group">
+      <a href="https://github.com/Alexisproactivo/AmigoNeon" class="btn btn-primary" target="_blank">⭐ Ver Código en GitHub</a>
+      <a href="https://github.com/Alexisproactivo/AmigoNeon/archive/refs/heads/main.zip" class="btn btn-secondary">⬇️ Descargar Proyecto (.ZIP)</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <h3>🎙️ Lipsync Real (RMS)</h3>
+      <p>Abre y cierra la boca reaccionando a la amplitud exacta de decibelios del audio con FFmpeg, sin desfases mecánicos.</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Inteligencia Híbrida</h3>
+      <p>Google Gemini 3.6 Flash para búsquedas web en vivo, con fallback automático a Qwen 2.5 Coder 14B local en tu RTX.</p>
+    </div>
+    <div class="card">
+      <h3>🎵 Spotify & YouTube Ducking</h3>
+      <p>Abre canciones con reconocimiento visual y baja automáticamente el volumen al 15% mientras conversas.</p>
+    </div>
+    <div class="card">
+      <h3>👁️ Visión de Monitor</h3>
+      <p>Captura tu pantalla con Base64 para analizar errores de código o darte su opinión en tiempo real.</p>
+    </div>
+    <div class="card">
+      <h3>💾 Memoria Persistente</h3>
+      <p>Base de datos PostgreSQL en la nube con Neon DB y caché local para recordar tus gustos y reglas sin latencia.</p>
+    </div>
+    <div class="card">
+      <h3>💬 Panel de Chat Flotante</h3>
+      <p>Interfaz retráctil con doble clic sobre el personaje para escribirle u ordenarle por voz sin tocar la terminal.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Desarrollado con Python 3.11, PyQt6 y Gemini Flash · Alexisproactivo</p>
+  </footer>
+
+</body>
+</html>
