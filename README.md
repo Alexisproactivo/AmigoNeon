@@ -1,6 +1,6 @@
 # 🤖 AmigoNeon - Asistente de Escritorio VTuber con IA Híbrida
 
-Asistente de escritorio interactivo y multimodal (VTuber overlay) desarrollado en **Python y PyQt6**. Incorpora sincronización labial (*lipsync*) en tiempo real guiada por amplitud de audio (RMS), visión de monitor, interacción manos libres por voz, control multimedia automatizado (Spotify y YouTube), panel gráfico de chat y una arquitectura híbrida de doble motor (**Google Gemini 3.6 Flash + Qwen 2.5 Coder 14B local vía Ollama**) con memoria persistente en **PostgreSQL Serverless (Neon DB)**.
+Asistente de escritorio interactivo y multimodal (VTuber overlay) desarrollado en **Python y PyQt6**. Incorpora sincronización labial (*lipsync*) en tiempo real guiada por amplitud de audio (RMS), visión de monitor, interacción manos libres por voz, control multimedia automatizado (Spotify y YouTube), panel gráfico de chat y una arquitectura híbrida de doble motor (**Google Gemini 3.8 Flash + Qwen 2.5 Coder 14B local vía Ollama**) con memoria persistente en **PostgreSQL Serverless (Neon DB)**.
 
 ---
 
