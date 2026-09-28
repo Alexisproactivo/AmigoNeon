@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+temp_*.wav
+temp_*.mp3
+venv/
+dist/
+build/
