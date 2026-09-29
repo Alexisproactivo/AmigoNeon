@@ -1,7 +1,6 @@
 import os
-import requests
-import json
 import threading
+import requests
 from config.settings import GEMINI_API_KEY
 from core.memoria import cargar_memoria_completa, guardar_recuerdo
 
@@ -42,12 +41,11 @@ Causa:"""
         "prompt": prompt,
         "stream": False,
         "options": {
-            "num_predict": 60,      # Respuestas cortas para no demorar
+            "num_predict": 60,
             "temperature": 0.5
         }
     }
     try:
-        # Timeout ampliado a 25 segundos para evitar 'Read timed out'
         res = requests.post("http://localhost:11434/api/generate", json=payload, timeout=25)
         respuesta = res.json().get("response", "Listo, Jefe.").strip()
         return procesar_recuerdos(respuesta)
@@ -65,19 +63,18 @@ Si el usuario te enseña algo nuevo sobre él, añade al final: [APRENDER: categ
     if imagen_b64:
         partes.append({"inline_data": {"mime_type": "image/jpeg", "data": imagen_b64}})
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key={GEMINI_API_KEY}"
+    # Endpoint estándar sin búsqueda web externa activa
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key={GEMINI_API_KEY}"
     
     payload = {
-        "contents": [{"parts": partes}],
-        "tools": [{"google_search": {}}]
+        "contents": [{"parts": partes}]
     }
 
     try:
-        # Límite estricto de 5 segundos para Gemini
         res = requests.post(url, json=payload, timeout=5)
         data = res.json()
         
-        # Si Google da error de cuota o rate limit, salta al respaldo sin trabarse
+        # Salto a Qwen local si la API de Google reporta saturación o cuota
         if "error" in data:
             print("[Aviso API]: Cuota o saturación en Google. Pasando a GPU local...")
             return consultar_qwen_local(mensaje_usuario)
@@ -88,7 +85,7 @@ Si el usuario te enseña algo nuevo sobre él, añade al final: [APRENDER: categ
             return procesar_recuerdos(texto)
 
     except Exception:
-        # Si hay timeout o corte de red con Google, responde la GPU
+        # Si ocurre timeout o fallo de red con Google, responde la GPU
         pass
 
     return consultar_qwen_local(mensaje_usuario)
