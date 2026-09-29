@@ -1,8 +1,31 @@
+# Variables de entorno y secretos
 .env
-__pycache__/
-*.pyc
-temp_*.wav
-temp_*.mp3
+
+# Entornos virtuales
 venv/
-dist/
+env/
+ENV/
+
+# Caché y compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos temporales de audio
+temp_*
+*.wav
+*.mp3
+
+# Binarios y compilaciones de PyInstaller
 build/
+dist/
+*.spec
+
+# Ejecutables y herramientas externas
+ffmpeg.exe
+ffprobe.exe
+*.exe
+
+# Configuraciones locales del editor
+.vscode/
+.idea/
